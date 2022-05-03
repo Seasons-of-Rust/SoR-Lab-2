@@ -49,7 +49,7 @@ fn calculate_safety_status(
     has_carrot: bool,
     friends_nearby: i32,
 ) -> bool {
-    todo!()
+    (!wolves_nearby && day_time) || has_carrot || friends_nearby > 3
 }
 
 /// Validate the simulation
@@ -88,6 +88,11 @@ mod tests {
         assert_eq!(false, calculate_safety_status(true, false, false, 0));
         assert_eq!(true, calculate_safety_status(false, true, false, 0));
         assert_eq!(true, calculate_safety_status(false, true, false, 4));
+
+        // From Jersey
+        assert_eq!(true, calculate_safety_status(true, false, true, 0));
+        assert_eq!(false, calculate_safety_status(true, false, false, 3));
+        assert_eq!(true, calculate_safety_status(true, false, false, 4));
     }
 
     #[test]
